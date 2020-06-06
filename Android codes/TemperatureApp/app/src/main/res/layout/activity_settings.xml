@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#95CAE4"
+    tools:context=".MainActivity">
+
+
+    <example.com.temperatureapp.ClearEditText
+        android:id="@+id/email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/login_edittext_bg"
+        android:drawableLeft="@drawable/icon_user"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="Input your email to receive alerts"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/setEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/login_button_bg"
+        android:text="Set email"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <example.com.temperatureapp.ClearEditText
+        android:id="@+id/fanOnTem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/login_edittext_bg"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="Input fan on temperature:"
+        android:inputType="number"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setEmail" />
+
+    <example.com.temperatureapp.ClearEditText
+        android:id="@+id/fanOffTem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/login_edittext_bg"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="Input fan off temperature:"
+        android:inputType="number"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fanOnTem" />
+
+    <Button
+        android:id="@+id/setFan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fanOffTem"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/login_button_bg"
+        android:text="Set Auto Fan"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fanOffTem" />
+
+    <example.com.temperatureapp.ClearEditText
+        android:id="@+id/LEDOnHour"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="13dp"
+        android:background="@drawable/login_edittext_bg"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="LED Open Hour"
+        android:singleLine="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/LEDOnMin"
+        app:layout_constraintEnd_toStartOf="@+id/LEDOnMin"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <example.com.temperatureapp.ClearEditText
+        android:id="@+id/LEDOnMin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/login_edittext_bg"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="LED Open Minute"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/LEDOnHour"
+        app:layout_constraintTop_toBottomOf="@+id/setFan" />
+
+    <example.com.temperatureapp.ClearEditText
+        android:id="@+id/LEDOffHour"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="13dp"
+        android:background="@drawable/login_edittext_bg"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="LED Close Hour"
+        android:singleLine="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/LEDOffMin"
+        app:layout_constraintEnd_toStartOf="@+id/LEDOffMin"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <example.com.temperatureapp.ClearEditText
+        android:id="@+id/LEDOffMin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/login_edittext_bg"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="LED Close Minute"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/LEDOffHour"
+        app:layout_constraintTop_toBottomOf="@+id/LEDOnMin" />
+
+    <Button
+        android:id="@+id/setLED"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fanOffTem"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/login_button_bg"
+        android:text="Set Auto LED"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LEDOffHour" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>Aquarium Monitor</title>
+<script type="text/javascript" src="./jquery-3.2.1.min.js"></script>
+<style>
+	html,body{
+		padding:0;
+		margin:0;
+	}
+    .chooseBtn {
+        display: none;
+    }
+    .choose-label {
+        box-shadow: #ccc 0px 0px 0px 1px;
+        width: 40px;
+        height: 20px;
+        display: inline-block;
+        border-radius: 20px;
+        position: relative;
+        background-color: #bdbdbd;
+        overflow: hidden;
+    }
+    .choose-label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        border-radius: 20px;
+        background-color: #fff;
+        z-index: 20;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+    .chooseBtn:checked + label.choose-label:before {
+        left: 20px;
+    }
+    .chooseBtn:checked + label.choose-label {
+        background-color: #51ccee;
+    }
+</style>
+</head>
+<body>
+<div style="background:green;height:4.3rem;font-size:1.3rem;line-height:4.3rem;padding-left:1rem;">Aquarium Monitor</div>
+<div style="text-align:center;">
+    <p>Aquarium Temperature</p>
+	<p id="myTemperature">None</p>
+    <p id="myTime">None</p>
+    <p>
+		AUTO FAN CONTROL
+		<input type="checkbox" name="auto" id="auto" class="chooseBtn" />
+		<label for="auto" class="choose-label"></label>
+	</p>
+    <p>
+		AUTO LED CONTROL
+		<input type="checkbox" name="autoLED" id="autoLED" class="chooseBtn" />
+		<label for="autoLED" class="choose-label"></label>
+	</p>
+	<p>MANUAL FAN BUTTONS</p>
+    <p><button class="fanButtons">Turn On Fan</button></p>
+	<p><button class="fanButtons">Turn Off Fan</button></p>
+    <p>MANUAL LED BUTTONS</p>
+    <p><button class="LEDButtons">Turn On LED</button></p>
+	<p><button class="LEDButtons">Turn Off LED</button></p>
+</div>
+<h1>Settings</h1>
+<table border="0">
+    <tr>
+     <td align="right">Input fan on temperature threshold:</td>
+     <td><input type="number" id="fanOnTem" name="fanOnTem" value=""></td>
+     <td id="fanOnTem_msg" style="color: red;"></td>
+    </tr>
+    <tr>
+     <td align="right">Input fan off temperature threshold:</td>
+     <td><input type="number" id="fanOffTem" name="fanOffTem" value=""></td>
+     <td id="fanOffTem_msg" style="color: red;"></td>
+    </tr>
+    <tr>
+     <td align="right"><input type="button" name="submit" value="Submit" onclick="setTemperature();"></td>
+     <td><input type="reset" name="reset" value="Clear"></td>
+    </tr>
+</table>
+<table border="0">
+    <tr>
+     <td align="right">Input LED open hour(24-hour system):</td>
+     <td><input type="number" id="LEDOnHour" name="LEDOnHour" value=""></td>
+     <td id="LEDOnHour_msg" style="color: red;"></td>
+    </tr>
+    <tr>
+     <td align="right">Input LED open minute:</td>
+     <td><input type="number" id="LEDOnMin" name="LEDOnMin" value=""></td>
+     <td id="LEDOnMin_msg" style="color: red;"></td>
+    </tr>
+    <tr>
+     <td align="right">Input LED close hour(24-hour system):</td>
+     <td><input type="number" id="LEDOffHour" name="LEDOffHour" value=""></td>
+     <td id="LEDOffHour_msg" style="color: red;"></td>
+    </tr>
+    <tr>
+     <td align="right">Input LED close minute:</td>
+     <td><input type="number" id="LEDOffMin" name="LEDOffMin" value=""></td>
+     <td id="LEDOffMin_msg" style="color: red;"></td>
+    </tr>
+    <tr>
+     <td align="right"><input type="button" name="submit" value="Submit" onclick="setLEDTime();"></td>
+     <td><input type="reset" name="reset" value="Clear"></td>
+    </tr>
+</table>
+</body>
+<script>
+//set default value 
+var fanOnTem = 38;
+var fanOffTem = 35;
+var manualOpen = false;
+var manualLEDOpen = false
+var isOpen = false;
+var myVar = '';
+var myVarLED = '';
+var LEDOpenHour = 18;
+var LEDOpenMin = 0;
+var LEDCloseHour = 6;
+var LEDCloseMin = 0;
+
+//Fan on
+function goFront(msg = false) {
+    $.get("https://maker.ifttt.com/trigger/sonoff_on/with/key/cAhYMuqhQvJ2rxpHOfOdok",
+        function (data) {
+            isOpen = true;
+            if(msg){
+                alert('Fan is on');
+            }
+        });
+}
+//Fan off
+function goLeft(msg = false) {
+
+    $.get("https://maker.ifttt.com/trigger/sonoff_off/with/key/cAhYMuqhQvJ2rxpHOfOdok",
+        function (data) {
+            isOpen = false;
+            if(msg){
+                alert('Fan is off');
+            }
+        });
+}
+
+//LED on
+function goFrontLED(msg = false) {
+    $.get("https://maker.ifttt.com/trigger/led_on/with/key/cAhYMuqhQvJ2rxpHOfOdok",
+        function (data) {
+            isOpen = true;
+            if(msg){
+                alert('LED is on');
+            }
+        });
+}
+//LED off
+function goLeftLED(msg = false) {
+    $.get("https://maker.ifttt.com/trigger/led_off/with/key/cAhYMuqhQvJ2rxpHOfOdok",
+        function (data) {
+            isOpen = false;
+            if(msg){
+                alert('LED is off');
+            }
+        });
+}
+
+
+//Get temperature data
+setInterval(function(){
+    $.get("http://aquarium-monitor.azurewebsites.net/api/temperature/latest?location=Aquarium",function(callback){
+        //console.log(callback);
+        $("#myTemperature").text(callback[0].temperature);
+    })
+    $("#myTime").text(getCurrentTime());
+},5000);
+
+
+//Auto Fan control
+$("input[name='auto']").change(function(event){
+    if(this.checked){
+	alert("Auto Fan opened.");
+        if(myVar == ''){
+            myVar = setInterval(function(){
+			
+                if(parseInt($("#myTemperature").text()) >= parseInt(fanOnTem)){
+					
+					goFront(); 
+                }else if(parseInt($("#myTemperature").text()) < parseInt(fanOffTem)){
+                    if(!manualOpen){
+						
+                        goLeft();
+                    }
+                }
+            },5000);
+        }
+    }else{
+        clearInterval(myVar);
+        myVar = '';
+		if(!manualOpen){goLeft();}
+    }
+});
+
+//Auto LED control
+$("input[name='autoLED']").change(function(event){
+    if(this.checked){
+		alert("Auto LED opened.");
+        if(myVarLED == ''){
+            myVarLED = setInterval(function(){
+                if(parseInt(getCurrentHour()) == parseInt(LEDOpenHour) && parseInt(getCurrentMinute()) == parseInt(LEDOpenMin)){
+                    
+					goFrontLED();
+                }else if(parseInt(getCurrentHour()) == parseInt(LEDCloseHour) && parseInt(getCurrentMinute()) == parseInt(LEDCloseMin) && !manualLEDOpen){
+                    
+					goLeftLED();
+                }
+            },5000);
+        }
+    }else{
+        clearInterval(myVarLED);
+        myVarLED = '';
+		if(!manualLEDOpen){goLeftLED();}
+    }
+});
+    
+//Manual Fan Buttons
+$(".fanButtons").click(function(event){
+    if(this.innerHTML == 'Turn On Fan'){
+        goFront(true);
+        manualOpen = true;
+    }else{
+        goLeft(true);
+        manualOpen = false;
+    }
+});
+    
+//Manual LED Buttons
+$(".LEDButtons").click(function(event){
+    if(this.innerHTML == 'Turn On LED'){
+        goFrontLED(true);
+        manualLEDOpen = true;
+    }else{
+        goLeftLED(true);
+        manualLEDOpen = false;
+    }
+});
+
+
+//clear input
+$("input[name='reset']").click(function(){
+    fanOnTem = 38;
+    fanOffTem = 35;
+    alert("Cleared");
+})
+
+
+function setTemperature()
+{
+    fanOnTem = document.getElementById("fanOnTem").value;
+    fanOffTem = document.getElementById("fanOffTem").value;
+
+    if(fanOnTem === "" || fanOffTem === ""){
+        fanOnTem = 38;
+        fanOffTem = 35;
+        alert("Both temperatures cannot be empty.");
+        return false;
+
+    }
+
+    if(fanOffTem > fanOnTem){
+        fanOnTem = 38;
+        fanOffTem = 35;
+        alert("Fan off temperature cannot be bigger than fan on temperature.");
+        return false;
+    }
+
+    alert("Auto fan set.")
+    return true;
+}
+    
+function setLEDTime()
+{
+    LEDOpenHour = document.getElementById("LEDOnHour").value;
+    LEDOpenMin = document.getElementById("LEDOnMin").value;
+    LEDCloseHour = document.getElementById("LEDOffHour").value;
+    LEDCloseMin = document.getElementById("LEDOffMin").value;
+    alert("Auto LED set.")
+}
+
+function getCurrentTime()
+{
+    var currentTime = new Date();
+    return currentTime;
+}
+
+function getCurrentHour()
+{
+    var currentTime = new Date();
+    var currentHour = currentTime.getHours();
+    return currentHour;
+}
+    
+function getCurrentMinute()
+{
+    var currentTime = new Date();
+    var currentMin = currentTime.getMinutes();
+    return currentMin;
+}
+</script>
+</html>
+

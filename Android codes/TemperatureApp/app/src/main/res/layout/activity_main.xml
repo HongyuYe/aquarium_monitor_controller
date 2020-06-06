@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#95CAE4"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Aquarium Temperature"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/temperature"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="None"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location" />
+
+    <Switch
+        android:id="@+id/fanSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="117dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="27dp"
+        android:text="Fan"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStartAuto"
+        app:layout_constraintEnd_toEndOf="@+id/LEDSwitch"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonStartAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="27dp"
+        android:text="Auto Control"
+        app:layout_constraintStart_toStartOf="@+id/fanSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/LEDSwitch" />
+
+    <Button
+        android:id="@+id/buttonStopAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:text="Stop Auto"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartAuto"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartAuto" />
+
+
+    <Button
+        android:id="@+id/getTempButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="18dp"
+        android:text="Get data"
+        app:layout_constraintStart_toStartOf="@+id/buttonStopAuto"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStopAuto" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Clear"
+        app:layout_constraintStart_toStartOf="@+id/getTempButton"
+        app:layout_constraintTop_toBottomOf="@+id/getTempButton" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginBottom="9dp"
+        android:text="Please do the settings before click 'AUTO CONTROL'"
+        app:layout_constraintBottom_toTopOf="@+id/settingsButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:text="Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperature" />
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Time"
+        app:layout_constraintStart_toStartOf="@+id/dateText"
+        app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
+    <Switch
+        android:id="@+id/LEDSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
+        android:text="LED"
+        app:layout_constraintStart_toEndOf="@+id/timeText"
+        app:layout_constraintTop_toBottomOf="@+id/timeText" />
+
+
+</android.support.constraint.ConstraintLayout>
